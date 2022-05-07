@@ -1,0 +1,120 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.001;
+
+vertices
+(
+    // (0 0 0)
+    // (2.997 0.1308 0)
+    // (2.997 0.1308 8)
+    // (0 0 8)
+    // (2.997 -0.1308 0)
+    // (2.997 -0.1308 8)
+
+    (0 0 0)
+    (3 0 0)
+    (3 0 4)
+    (0 0 4)
+    (0 3 0)
+    (3 3 0)
+    (3 3 4)
+    (0 3 4)
+    
+);
+
+blocks
+(
+    hex (0 1 5 4 3 2 6 7) (100 100 130) simpleGrading (1 1 1)
+    
+);
+
+// patches
+// (
+    // patch outlet
+    // (
+    //   (6 2 1 5)
+    //   (7 6 5 4)
+    // )
+
+    // patch top
+    // (
+    //   (7 3 2 6)
+    // )
+    // patch bottom
+    // (
+    //     (0 4 5 1)
+    // )
+    
+    // patch sym
+    // (
+    //     (3 7 4 0)
+    //     (0 1 2 3)
+
+    // )
+// );
+
+boundary               // keyword
+    (
+        outlet
+        {
+            type patch;
+            faces
+            (
+                (6 2 1 5)
+                (7 6 5 4) 
+            );
+        }
+
+        top
+        {
+            type patch;
+            faces
+            (
+                (7 3 2 6) 
+            );
+        }
+
+        bottom
+        {
+            type patch;
+            faces
+            (
+                (0 4 5 1) 
+            );
+        }
+
+        sym             // patch name
+        {
+            type symmetry;    // patch type for patch 1
+            faces
+            (
+                (3 7 4 0)
+                (0 1 2 3)
+            );
+        }
+        
+
+
+
+    );
+mergePatchPairs
+(
+
+
+);
+
+// ************************************************************************* //
